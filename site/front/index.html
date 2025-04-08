@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="head">
+        <label for="">enter a product id [1,10] </label>
+        <input type="number" name="input" id="input">
+        <button id="btn">Submit</button>
+    </div>
+    <div class="product">
+        <h2 id="nom"></h2>
+        <p id="idProduct"></p>
+        <p id="price"></p>
+    </div>
+    
+    <video class="webcamEste" autoplay height="400" width="400" style="border:1px solid black;"></video>
+
+</body>
+<script>
+    const inputNbr = document.querySelector("#input");
+    const btn = document.querySelector("#btn");
+
+    const nom = document.querySelector("#nom");
+    const idProduct = document.querySelector("#idProduct");
+    const price = document.querySelector("#price");
+
+    
+    btn.addEventListener("click", ()=>{
+
+
+       // navigator.mediaDevices.getUserMedia({video:true}).then(stream=>{
+        //    console.log(stream)
+          //  const webcamEste = document.querySelector(".webcamEste");
+            //stream.getVid
+            //webcamEste.srcObject = stream;
+        //}).catch(console.log);
+        //return;
+        
+        
+        
+        const idNbr = inputNbr.value;
+    fetch("http://localhost:4090/product?id="+idNbr)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        nom.innerText = data.name;
+        idProduct.innerText = data.id;
+        price.innerText = data.price;
+    })
+})
+</script>
+</html>
